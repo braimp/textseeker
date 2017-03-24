@@ -1,0 +1,15 @@
+bugs:
+
+* rounding mac forms
+* save filetypes
+* mac binary plist
+* consistent top panel
+* autoload search if set on selectdir?
+* on mac default directory is "/" if none set; should be ~/Documents
+
+features:
+
+* testing/debug mode
+* capture search into initial views?
+* ability to clear off history item
+* context menu of view list!

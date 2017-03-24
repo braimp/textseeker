@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Text Seeker
+GenericName=Text Seeker
+Comment=Simple text viewer and search tool
+Exec=textseeker
+Categories=Application;Utility;DesktopUtility;Qt;Filesystem;
+Icon=textseeker
