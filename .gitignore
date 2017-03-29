@@ -6,7 +6,6 @@
 *.qm
 *.o
 *.obj
-*.exe
 
 ui_*
 qrc_*
@@ -14,8 +13,13 @@ moc_*
 
 *.tar.gz
 *.zip
+*.exe
+*.app
 
+textseeker.spec
 textseeker
 Makefile
+
+.qmake.*
 .DS_Store
 
