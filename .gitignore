@@ -16,7 +16,6 @@ moc_*
 *.exe
 *.app
 
-textseeker.spec
 textseeker
 Makefile
 
