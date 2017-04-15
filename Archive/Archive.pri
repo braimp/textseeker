@@ -31,6 +31,13 @@ macx:CONFIG(release, release|debug):CONFIG(app_bundle) {
     publish_and_archive.depends = publish archive
 }
 
+win32:CONFIG(release, release|debug) {
+    QMAKE_EXTRA_TARGETS += archive publish_and_archive
+    archive.depends = all
+    archive.commands += $${PWD}/Archive.cmd $${TARGET}
+    publish_and_archive.depends = publish archive
+}
+
 OTHER_FILES += \
     $${PWD}/Archive.sh \
     $${PWD}/Archive.cmd \
