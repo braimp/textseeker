@@ -6,6 +6,7 @@
 *.qm
 *.o
 *.obj
+*.rpm
 
 ui_*
 qrc_*

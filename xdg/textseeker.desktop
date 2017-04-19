@@ -5,5 +5,5 @@ Name=Text Seeker
 GenericName=Text Seeker
 Comment=Simple text viewer and search tool
 Exec=textseeker
-Categories=Application;Utility;DesktopUtility;Qt;Filesystem;
+Categories=Application;Utility;Qt;Filesystem;
 Icon=textseeker
