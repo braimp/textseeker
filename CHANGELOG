@@ -3,3 +3,7 @@ v1.0.0
 
 v1.0.1
 * Make specfile part of source
+
+v1.0.2
+* Fixed spec for fedora and redhat
+
