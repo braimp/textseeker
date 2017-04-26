@@ -1,14 +1,13 @@
 Name: textseeker
+Epoch:   1
 Version: 1.0.2
 Release: 1
 Summary: Simple text viewer and search tool
 License: GPLv3+
 URL:     https://gitlab.com/tychosoft/textseeker
 Source:  https://pub.cherokeesofidaho.org/tarballs/%{name}-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: qt5-qtbase-devel qt5-linguist
 BuildRequires:  gcc-c++
-Group: Applications/Text
 
 %description
 A simple text search and viewer utility.  This is somewhat like the
