@@ -453,11 +453,9 @@ void Main::closeTab(int tab)
         ui.tabs->setTabsClosable(false);
 }
 
-#define tr(x)   QCoreApplication::translate("Main", x)
-
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setApplicationVersion(VERSION);
+    QCoreApplication::setApplicationVersion(PROJECT_VERSION);
     QCoreApplication::setOrganizationName("Tycho Softworks");
     QCoreApplication::setOrganizationDomain("tychosoft.com");
     QCoreApplication::setApplicationName("TextSeeker");
@@ -492,9 +490,9 @@ int main(int argc, char *argv[])
     Args::add(args, {
         {Args::HelpArgument},
         {Args::VersionArgument},
-        {{"reset"}, tr("Reset Config")},
-        {{{"prefix"}, tr("Directory prefix to use.")}},
-        {{{"filter"}, tr("Filter by file types.")}},
+        {{"reset"}, "Reset Config"},
+        {{{"prefix"}, "Directory prefix to use."}},
+        {{{"filter"}, "Filter by file types."}},
     });
 
     args.process(app);

@@ -1,6 +1,6 @@
 Name: textseeker
 Epoch:   1
-Version: 1.0.2
+Version: 1.1.0
 Release: 1
 Summary: Simple text viewer and search tool
 License: GPLv3+
