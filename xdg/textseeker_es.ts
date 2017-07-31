@@ -17,11 +17,19 @@
     </message>
     <message>
         <source>Copyright (c) </source>
-        <translation>Derechos de autor </translation>
+        <translation type="vanished">Derechos de autor </translation>
     </message>
     <message>
         <source>About TextSearch</source>
-        <translation>Acerca de TextSearch</translation>
+        <translation type="vanished">Acerca de TextSearch</translation>
+    </message>
+    <message>
+        <source>Copyright (C) </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About TextSeeker</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -41,13 +49,21 @@
         <source>&amp;Next</source>
         <translation>&amp;Siguiente</translation>
     </message>
+    <message>
+        <source>Find Text</source>
+        <translation type="unfinished">Búsqueda de texto</translation>
+    </message>
+    <message>
+        <source>Meta+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meta+N</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Main</name>
-    <message>
-        <source>TextSeeker - Text Search Utility</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>&amp;Quit</source>
         <translation>&amp;Dejar</translation>
@@ -88,13 +104,13 @@
         <source>Directory</source>
         <translation>Directorio</translation>
     </message>
+    <message>
+        <source>TextSeeker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
-    <message>
-        <source>Tycho TextSearch</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>...</source>
         <translation type="unfinished"></translation>
@@ -121,7 +137,7 @@
     </message>
     <message>
         <source>&amp;Quit TextSearch</source>
-        <translation type="unfinished">Dejar TextSearch</translation>
+        <translation type="obsolete">Dejar TextSearch</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -137,7 +153,7 @@
     </message>
     <message>
         <source>&amp;About TextSearch</source>
-        <translation type="unfinished">&amp;Acerca de TextSearch</translation>
+        <translation type="obsolete">&amp;Acerca de TextSearch</translation>
     </message>
     <message>
         <source>About</source>
@@ -171,6 +187,18 @@
         <source>Options</source>
         <translation>Opciones</translation>
     </message>
+    <message>
+        <source>TextSeeker - Text Search Utility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit TextSeeker</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About TextSeeker</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Options</name>
@@ -185,6 +213,17 @@
     <message>
         <source>Options</source>
         <translation>Opciones</translation>
+    </message>
+</context>
+<context>
+    <name>Statusbar</name>
+    <message>
+        <source>Press F3 to search for text in content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
