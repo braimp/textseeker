@@ -144,6 +144,22 @@ publish.commands += git archive --output="$${OUT_PWD}/$${ARCHIVE}-$${VERSION}.ta
 linux:exists("/usr/bin/rpmbuild"):\
     publish.commands += && rm -f *.src.rpm && rpmbuild --define \"_tmppath /tmp\" --define \"_sourcedir .\" --define \"_srcrpmdir .\" --nodeps -bs $${ARCHIVE}.spec
 
+# documentation processing
+QMAKE_EXTRA_TARGETS += docs
+QMAKE_SUBSTITUTES += doxyfile
+DOXYPATH = $${PWD}
+doxyfile.input = $${PWD}/Doxyfile
+doxyfile.output = $${OUT_PWD}/Doxyfile.out
+macx:docs.commands += PATH=/usr/local/bin:/usr/bin:/bin:/Library/Tex/texbin:$PATH && export PATH &&
+docs.commands += cd $${OUT_PWD} && doxygen Doxyfile.out
+macx:docs.commands += && cd doc/html && make docset && cd ../..
+unix:docs.commands += && cd doc/latex && make
+
+# clean additional testing files on distclean...
+QMAKE_EXTRA_TARGETS += distclean publishclean
+distclean.depends += publishclean
+publishclean.commands += rm -rf Archive $${ARCHIVE}-*.tar.gz $${ARCHIVE}-*.pdf $${ARCHIVE} doc Doxyfile.out
+
 RESOURCES += $${PRODUCT}.qrc
 OTHER_FILES += \
     $${ARCHIVE}.spec \

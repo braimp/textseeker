@@ -1,3 +1,8 @@
+bundled/
+generated/
+doc/
+*.gch/
+
 *_resource.rc
 *.pro.user.*
 *.pro.user
@@ -8,19 +13,18 @@
 *.obj
 *.rpm
 
-ui_*
-qrc_*
-moc_*
-
 *.tar.gz
 *.zip
-*.exe
 *.app
 *.app.dSYM
-
-textseeker
-Makefile
+*.exe
 
 .qmake.*
 .DS_Store
+Makefile
+textseeker
+
+moc_*
+qrc_*
+ui_*
 
