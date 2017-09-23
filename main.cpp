@@ -51,9 +51,9 @@ QMainWindow(), settings(CONFIG_FROM)
     if(reset)
         settings.clear();
 
-#ifdef TESTDATA_PATH
+#ifdef PROJECT_TESTDATA
     if(dirPrefix.isEmpty())
-        dirPrefix = TESTDATA_PATH;
+        dirPrefix = PROJECT_TESTDATA;
     if(fileFilter.isEmpty())
         fileFilter = ".txt";
 #endif
@@ -101,7 +101,7 @@ QMainWindow(), settings(CONFIG_FROM)
     else
         ui.filterTypes->setText(settings.value("filter", ".txt;.log").toString());
 
-#ifdef TESTDATA_PATH
+#ifdef PROJECT_TESTDATA
     Sensitive = false;
     Find::setSensitive(false);
 #else
@@ -189,7 +189,7 @@ Main::~Main()
 
 void Main::sync()
 {
-#ifndef TESTDATA_PATH
+#ifndef PROJECT_TESTDATA
     if(fileFilter.isEmpty())
         settings.setValue("filter", ui.filterTypes->text());
 
