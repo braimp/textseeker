@@ -37,8 +37,9 @@ public:
     }
 
     inline void release() {
-        if(find)
+        if(find) {
             find->close();
+        }
     }
 
     void setDirection(bool forward, bool sensitivity);
