@@ -72,15 +72,8 @@ QMainWindow(), settings(CONFIG_FROM)
 
     // ui setup and object initialization...
 
-#if defined(Q_OS_WIN)
-    setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    setIconSize(QSize(24, 24));         // uniform icon size...
-#elif defined(Q_OS_MAC)
     setToolButtonStyle(Qt::ToolButtonIconOnly);
-    setIconSize(QSize(24, 24));         // uniform icon size...
-#else
-    setToolButtonStyle(Qt::ToolButtonFollowStyle);
-#endif
+    setIconSize(QSize(16, 16));         // uniform icon size...
 
     ui.setupUi(static_cast<QMainWindow *>(this));
     ui.filterTypes->setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -160,7 +153,7 @@ QMainWindow(), settings(CONFIG_FROM)
     connect(ui.actionOptions, &QAction::triggered, this, &Main::changeSettings);
     connect(ui.actionQuit, &QAction::triggered, qApp, &QCoreApplication::quit);
 
-    connect(ui.pathButton, &QToolButton::pressed, this, &Main::changeDir);
+    connect(ui.pathButton, &QPushButton::pressed, this, &Main::changeDir);
     connect(ui.pathBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Main::selectDir);
     connect(ui.actionSearch, &QAction::triggered, this, &Main::reloadMatches);
     connect(ui.searchName, &QLineEdit::returnPressed, this, &Main::reloadMatches);
@@ -338,11 +331,10 @@ void Main::selectDir(int selected)
 
 void Main::changeSettings()
 {
-    if(options)
-        ui.tabs->setCurrentIndex(options->tabIndex());
-    else
+    if(!options)
         options = new Options(ui.tabs);
 
+    ui.tabs->setCurrentIndex(options->tabIndex());
     ui.tabs->setTabsClosable(true);
 }
 
@@ -478,13 +470,15 @@ int main(int argc, char *argv[])
     if(!localize.isEmpty())
         app.installTranslator(&localize);
 
-    QFile style(CSS_STYLE);
+    QFile style(":/styles/desktop.css");
     if(style.exists()) {
         style.open(QFile::ReadOnly);
         QString css = QLatin1String(style.readAll());
         style.close();
         qApp->setStyleSheet(css);
     }
+    else
+        abort();
 
     args.setApplicationDescription("Simple Text Viewer and Search Tool");
     Args::add(args, {

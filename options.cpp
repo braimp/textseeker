@@ -30,8 +30,6 @@ QDialog()
 
     tab = tabs->count();
     tabs->addTab(this, tr("Options"));
-    tabs->setCurrentIndex(tab);
-    tabs->setTabsClosable(true);
 
     connect(ui.checkFilename, &QCheckBox::stateChanged, this, &Options::setFilesSensitive);
     connect(ui.checkSensitive, &QCheckBox::stateChanged, this, &Options::setViewerSensitive);

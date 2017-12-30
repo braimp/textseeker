@@ -1,0 +1,53 @@
+QLineEdit#searchText {
+    border: 1px solid #c0c0c0;
+    border-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: 0px;
+    padding: 2px;
+    margin: 0px;
+    padding-left: 0px;
+}
+
+QLabel#searchLabel {
+    border: 1px solid #c0c0c0;
+    border-right: 0px;
+    border-radius: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 4px;
+    padding-right: 0px;
+    margin: 0px;
+    background: white;
+}
+
+QToolBar#toolBar {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    background: white;
+}
+
+QMainWindow, QDialog, QStatusBar, QTabWidget::pane {
+    background: white;
+}
+
+QTabBar::close-button {
+    image: url(:/images/close.png);
+}
+
+QWidget#indexTab, QTableView#indexView, QTextEdit {
+    background: white;
+    border: 0px;
+    margin: 1px;
+}
+
+QDialog {
+    border: 1px solid gray;
+}
+
+QDialog#Options {
+    margin: 1px;
+    border: 0px;
+}
+
