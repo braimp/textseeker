@@ -28,26 +28,23 @@ QToolBar#toolBar {
     background: white;
 }
 
-QMainWindow, QDialog, QStatusBar, QTabWidget::pane {
+QLineEdit {
+    background: white;
+    padding: 1px;
+}
+
+QGroupBox {
+    background: white;
+    font-weight: bold;
+}
+
+QDialog, QMainWindow, QStatusBar, QListView, QStackedWidget, QTabWidget::pane {
     background: white;
 }
 
 QTabBar::close-button {
     image: url(:/images/close.png);
-}
-
-QWidget#indexTab, QTableView#indexView, QTextEdit {
-    background: white;
-    border: 0px;
-    margin: 1px;
-}
-
-QDialog {
-    border: 1px solid gray;
-}
-
-QDialog#Options {
-    margin: 1px;
-    border: 0px;
+    height: 12px;
+    width: 12px;
 }
 

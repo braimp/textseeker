@@ -52,24 +52,30 @@
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="leftMargin">
-       <number>0</number>
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="bottomMargin">
-       <number>0</number>
+       <number>4</number>
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="leftMargin">
-         <number>12</number>
+         <number>0</number>
         </property>
         <property name="topMargin">
          <number>12</number>
         </property>
         <property name="rightMargin">
-         <number>12</number>
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>4</number>
         </property>
         <item>
          <widget class="QComboBox" name="pathBox">
@@ -129,10 +135,13 @@
       <item>
        <layout class="QGridLayout" name="gridLayout">
         <property name="leftMargin">
-         <number>12</number>
+         <number>2</number>
         </property>
         <property name="rightMargin">
-         <number>12</number>
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>4</number>
         </property>
         <item row="0" column="3">
          <widget class="QLabel" name="label_3">
@@ -178,8 +187,17 @@
       </item>
       <item>
        <widget class="QTabWidget" name="tabs">
+        <property name="tabShape">
+         <enum>QTabWidget::Rounded</enum>
+        </property>
         <property name="currentIndex">
          <number>0</number>
+        </property>
+        <property name="documentMode">
+         <bool>false</bool>
+        </property>
+        <property name="tabsClosable">
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="indexTab">
          <attribute name="title">
@@ -190,7 +208,7 @@
            <number>0</number>
           </property>
           <property name="topMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>0</number>
@@ -202,6 +220,9 @@
            <widget class="QTableView" name="indexView">
             <property name="frameShape">
              <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>

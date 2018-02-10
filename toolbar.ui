@@ -39,7 +39,7 @@
     <number>4</number>
    </property>
    <property name="rightMargin">
-    <number>4</number>
+    <number>12</number>
    </property>
    <property name="bottomMargin">
     <number>4</number>
@@ -84,7 +84,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../TextSeeker.qrc">:/images/searchicon.png</pixmap>
+      <pixmap resource="TextSeeker.qrc">:/images/searchicon.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -116,7 +116,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../TextSeeker.qrc"/>
+  <include location="TextSeeker.qrc"/>
  </resources>
  <connections/>
 </ui>
