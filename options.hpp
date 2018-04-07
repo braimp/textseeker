@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __OPTIONS_HPP__
-#define __OPTIONS_HPP__
+#ifndef OPTIONS_HPP_
+#define OPTIONS_HPP_
 
 #include <QDialog>
 #include <QTabWidget>
@@ -31,7 +31,7 @@ class Options final : public QDialog
 public:
     Options(QTabWidget *tabs);
 
-    ~Options();
+    ~Options() final;
 
     inline int tabIndex() const {
         return tab;

@@ -22,9 +22,37 @@
 #include <QDir>
 #include <QDebug>
 
-Index::Index(QObject *parent, QString basename, QStringList ext, QString match, bool casefilter) :
-QAbstractTableModel(parent)
+class Loader final : public QObject
 {
+    Q_OBJECT
+    Q_DISABLE_COPY(Loader)
+public:
+    Loader(QObject *parent, const QString basename, const QStringList& ext, const QString& match, bool casefilter);
+
+private:
+    QObject *parent;
+    QString basename;
+    QStringList ext;
+    QString match;
+    bool caseflag;
+
+signals:
+    void createIndex(Index *result);
+};
+
+Index::Index(QString basename, const QStringList& ext, const QString& match, bool caseFlag) :
+QAbstractTableModel()
+{
+    auto thread = new QThread();
+    moveToThread(thread);
+
+    connect(this, &Index::finished, thread, &QThread::quit);
+    connect(thread, &QThread::started, this, &Index::run);
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+
+    savedMatch = match;
+    savedCase = caseFlag;
+
     rows = 0;
 
     if(basename.right(1) == "$")
@@ -41,12 +69,9 @@ QAbstractTableModel(parent)
         else
             filters << basename;
     }
-
-    qDebug() << "enter match" << match;
-    scan("", match, casefilter);
 }
 
-bool Index::grep(QString& path, QString& match, bool casefilter)
+bool Index::grep(const QString& path, const QString& match, bool casefilter)
 {
     bool result = false;
     Qt::CaseSensitivity cs = Qt::CaseInsensitive;
@@ -73,7 +98,14 @@ bool Index::grep(QString& path, QString& match, bool casefilter)
     return result;
 }
 
-void Index::scan(QString path, QString match, bool casefilter)
+void Index::run()
+{
+    scan("", savedMatch, savedCase);
+    emit updateIndex(this);
+    emit finished();
+}
+
+void Index::scan(const QString& path, const QString &match, bool casefilter)
 {
     QString spec;
     QString name;
@@ -123,9 +155,7 @@ void Index::scan(QString path, QString match, bool casefilter)
     }
 }
 
-Index::~Index()
-{
-}
+Index::~Index() = default;
 
 int Index::rowCount(const QModelIndex& parent) const
 {

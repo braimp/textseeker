@@ -15,10 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __INDEX_HPP__
-#define __INDEX_HPP__
+#ifndef INDEX_HPP_
+#define INDEX_HPP_
 
 #include <QAbstractTableModel>
+#include <QThread>
 
 #include "compiler.hpp"
 
@@ -28,15 +29,21 @@ class Index final : public QAbstractTableModel
     Q_DISABLE_COPY(Index)
 
 public:
-    Index(QObject *parent, QString basename, QStringList ext, QString match, bool casefilter);
-    ~Index();
+    Index(QString basename, const QStringList &ext, const QString &match, bool caseFlag);
+    ~Index() final;
 
-    void scan(QString path, QString match, bool casefilter);
-    bool grep(QString& path, QString& match, bool casefilter);
+    void start() {
+        thread()->start();
+    }
+
+    void scan(const QString &path, const QString& match, bool casefilter);
+    bool grep(const QString &path, const QString &match, bool casefilter);
 
     const QString name(int row) const;
 
 private:
+    QString savedMatch;
+    bool savedCase;
     QStringList filters;
     QStringList names;
     int rows;
@@ -45,6 +52,13 @@ private:
     int columnCount(const QModelIndex& parent) const final;
     QVariant data(const QModelIndex &index, int role) const final;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const final;
+
+signals:
+    void updateIndex(Index *result);
+    void finished();
+
+private slots:
+    void run();
 };
 
 
