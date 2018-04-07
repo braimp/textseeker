@@ -84,7 +84,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="TextSeeker.qrc">:/images/searchicon.png</pixmap>
+      <pixmap resource="qrc/desktop.qrc">:/images/searchicon.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -116,7 +116,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="TextSeeker.qrc"/>
+  <include location="qrc/desktop.qrc"/>
  </resources>
  <connections/>
 </ui>

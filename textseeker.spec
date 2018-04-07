@@ -27,7 +27,7 @@ qmake-qt5 QMAKE_CXXFLAGS+="\"%optflags\"" QMAKE_STRIP="/bin/true"
 %files
 %defattr(-,root,root)
 %doc README.md LICENSE CHANGELOG
-%{_bindir}/%{name}
+%{_bindir}/textseeker
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 %{_datadir}/appdata/%{name}.appdata.xml

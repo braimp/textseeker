@@ -35,9 +35,7 @@ QDialog()
     connect(ui.checkSensitive, &QCheckBox::stateChanged, this, &Options::setViewerSensitive);
 }
 
-Options::~Options()
-{
-}
+Options::~Options() = default;
 
 void Options::setViewerSensitive(int state)
 {

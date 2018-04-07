@@ -19,7 +19,6 @@
 #include "about.hpp"
 #include "viewer.hpp"
 #include "args.hpp"
-#include "busycursor.hpp"
 #include "ui_main.h"
 
 #include <QStandardPaths>
@@ -221,50 +220,61 @@ void Main::error(const QString& text)
     update();
 }
 
-void Main::about(void)
+void Main::about()
 {
     About info(this);
     info.exec();
 }
 
-void Main::clear(void)
+void Main::clear()
 {
-    ui.indexView->setModel(NULL);
+    ui.indexView->setModel(nullptr);
     ui.searchName->setText("*");
     toolbar->clearSearch();
     status(tr("ready"));
 
     if(index) {
         delete index;
-        index = NULL;
+        index = nullptr;
     }
 }
 
-void Main::reloadMatches(void)
+void Main::reloadMatches()
 {
     QString match = toolbar->searching();
     toolbar->disableSearch();
-    status(tr("searching..."));
+    status(tr("searching...please wait..."));
     this->update();
-    BusyCursor busy;
 
-    ui.indexView->setModel(NULL);
+    ui.indexView->setModel(nullptr);
     ui.tabs->setCurrentIndex(0);
-    if(index)
+    if(index) {
         delete index;
+        index = nullptr;
+    }
 
     QString filters = ui.filterTypes->text();
     filters.replace(QChar(','), QChar(';'));
     filters.remove(QChar('*'));
 
-    index = new Index(ui.indexView, ui.searchName->text(), filters.split(";"), match, Sensitive);
-    ui.indexView->setModel(index);
-    toolbar->enableSearch();
-    status(tr("ready"));
-    this->update();
+    auto ind = new Index(ui.searchName->text(), filters.split(";"), match, Sensitive);
+    connect(ind, &Index::updateIndex, this, &Main::updateIndex);
+    ind->start();
+    setEnabled(false);
+    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 }
 
-void Main::openViewer(void)
+void Main::updateIndex(Index *ind)
+{
+    index = ind;
+    ui.indexView->setModel(index);
+    toolbar->enableSearch();
+    setEnabled(true);
+    status(tr("ready"));
+    QApplication::restoreOverrideCursor();
+}
+
+void Main::openViewer()
 {
     openAt(ui.indexView->currentIndex());
 }
@@ -322,7 +332,7 @@ void Main::selectDir(int selected)
 //  qDebug() << "SELECT PATH " << path << " DIR " << dir.path() << endl;
     history.insert(0, dir.path());
 
-    ui.indexView->setModel(NULL);
+    ui.indexView->setModel(nullptr);
     if(index) {
         delete index;
         index = nullptr;
@@ -350,7 +360,7 @@ void Main::showContextMenu(const QPoint& pos)
     m.exec(mapToGlobal(pos));
 }
 
-void Main::changeDir(void)
+void Main::changeDir()
 {
     QString path = QFileDialog::getExistingDirectory(this, tr("Directory"), dir.path());
 
@@ -455,7 +465,7 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
     QCommandLineParser args;
-    Q_INIT_RESOURCE(TextSeeker);
+    Q_INIT_RESOURCE(desktop);
 
 #if defined(Q_OS_MAC)
     localize.load(QLocale::system().name(), "textseeker", "_", 

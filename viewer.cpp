@@ -46,7 +46,7 @@ QTextEdit()
     }
 
     findText = "";
-    findBy = 0;
+    findBy = nullptr;
     find = nullptr;
 
     setReadOnly(true);
@@ -86,7 +86,7 @@ void Viewer::closeFind(QObject *object)
 void Viewer::setDirection(bool forward, bool sensitivity)
 {
     if(forward)
-        findBy = 0;
+        findBy = nullptr;
     else
         findBy = QTextDocument::FindBackward;
 

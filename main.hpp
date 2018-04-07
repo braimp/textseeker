@@ -15,8 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __MAIN_HPP__
-#define __MAIN_HPP__
+#ifndef MAIN_HPP_
+#define MAIN_HPP_
 
 #include <QApplication>
 #include <QObject>
@@ -40,7 +40,7 @@ class Main final : public QMainWindow
 
 public:
     Main(const QStringList& args, bool reset = false);
-    ~Main();
+    ~Main() final;
 
     inline static Main *instance() {
         Q_ASSERT(Instance != nullptr);
@@ -75,6 +75,7 @@ public slots:
     void reloadMatches();
     void searchText();
     void enableFind();
+    void updateIndex(Index *ind);
 
 private slots:
     void about();
