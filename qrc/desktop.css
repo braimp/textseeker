@@ -42,4 +42,9 @@ QDialog, QMainWindow, QStatusBar, QListView, QStackedWidget, QTabWidget::pane {
     background: white;
 }
 
+QDialog {
+    border: 1px solid #c0c0c0;
+}
+
+
 
