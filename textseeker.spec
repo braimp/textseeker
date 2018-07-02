@@ -1,12 +1,12 @@
 Name: textseeker
 Epoch:   1
-Version: 1.1.0
+Version: 1.1.1
 Release: 1
 Summary: Simple text viewer and search tool
 License: GPLv3+
 Group:   Applications/Text
 URL:     https://gitlab.com/tychosoft/textseeker
-Source:  https://pub.cherokeesofidaho.org/tarballs/%{name}-%{version}.tar.gz
+Source:  https://www.cherokeesofidaho.org/public/tarballs/%{name}-%{version}.tar.gz
 BuildRequires: qt5-qtbase-devel qt5-linguist
 BuildRequires:  gcc-c++
 
@@ -30,7 +30,7 @@ qmake-qt5 QMAKE_CXXFLAGS+="\"%optflags\"" QMAKE_STRIP="/bin/true"
 %{_bindir}/textseeker
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
-%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/metainfo/%{name}.appdata.xml
 %{_datadir}/translations/%{name}_*.qm
 %{_mandir}/man1/%{name}.1*
 
