@@ -1,8 +1,7 @@
 TEMPLATE = app
 VERSION = 1.1.1
-COPYRIGHT = 2017
+COPYRIGHT = 2017-2018
 ARCHIVE = textseeker
-unix:!macx:TARGET = textseeker
 
 # basic compile and link config
 CONFIG += c++11 warning widgets gui core
@@ -10,13 +9,11 @@ QT += widgets
 
 # build type specific options
 CONFIG(release,release|debug):DEFINES += QT_NO_DEBUG_OUTPUT QT_NO_DEBUG
-else {
-    DEFINES += PROJECT_TESTDATA=\\\"$${PWD}/testdata\\\"
-    CONFIG -= app_bundle
-}
+else:DEFINES += PROJECT_TESTDATA=\\\"$${PWD}/testdata\\\"
 
 # platform specific options
 unix {
+    !macx:TARGET=textseeker
     isEmpty(PREFIX):PREFIX=$$system(echo $$[QT_INSTALL_DATA] | sed s:/[a-z0-9]*/qt5$::)
     system(rm -f "$${OUT_PWD}/$${TARGET}")
 
@@ -38,13 +35,14 @@ macx {
         ICON = "$${TARGET}.icns"
         system(rm -rf "$${OUT_PWD}/$${TARGET}.app")
     }
+    else:TARGET=textseeker
 }
 
 win32 {
     QMAKE_CXXFLAGS_RELEASE += /Zi
     QMAKE_LFLAGS_RELEASE += /debug
     CONFIG -= debug_and_release debug_and_release_target
-    CONFIG += skip_target_version_ext app_bundle
+    CONFIG += skip_target_version_ext
     LRELEASE = lrelease
     LUPDATE = lupdate
     DEFINES += WIN32_LEAN_AND_MEAN
@@ -81,8 +79,16 @@ for(tr, TRANSLATIONS) {
     system($${LRELEASE} -silent $${tr} -qm "$${OUT_PWD}/generated/$$first(tr_out).qm")
 }
 
+# source publish
+unix {
+    QMAKE_EXTRA_TARGETS += source
+    source.commands += $$QMAKE_DEL_FILE *.tar.gz &&
+    source.commands += cd $${PWD} &&
+    source.commands += git archive --output="$${OUT_PWD}/$${ARCHIVE}-$${VERSION}.tar.gz" --format tar.gz  --prefix=$${ARCHIVE}-$${VERSION}/ v$${VERSION} 2>/dev/null || git archive --output="$${OUT_PWD}/$${ARCHIVE}-$${VERSION}.tar.gz" --format tar.gz  --prefix=$${ARCHIVE}-$${VERSION}/ HEAD 
+}
+
 # extra install targets based on bundle state
-!CONFIG(app_bundle) {
+unix:!CONFIG(app_bundle) {
     QMAKE_EXTRA_TARGETS += target locale man1
     INSTALLS += target locale man1
 
@@ -97,7 +103,7 @@ for(tr, TRANSLATIONS) {
     man1.path = "$$PREFIX/share/man/man1"
     man1.depends = target
 
-    unix:!macx {
+    !macx {
         QMAKE_EXTRA_TARGETS += desktop pixmaps appdata
         INSTALLS += desktop pixmaps appdata
 
@@ -111,8 +117,10 @@ for(tr, TRANSLATIONS) {
 
         appdata.files = xdg/*.appdata.xml
         appdata.path = "$$PREFIX/share/appdata"
-        appdata.depends = target
+        appdata.depends = target        
     }
+    exists(debian/Debian.pri):include(debian/Debian.pri)
+    exists(redhat/Redhat.pri):include(redhat/Redhat.pri)
 }
 else {
     win32:CONFIG(release, release|debug) {
@@ -129,35 +137,11 @@ else {
         QMAKE_POST_LINK += cp -a "$$[QT_INSTALL_TRANSLATIONS]"/qt_??.qm generated/*.qm "$${TARGET}.app/Contents/Translations"
     }
     
-    QMAKE_EXTRA_TARGETS += clean extra_clean distclean
+    QMAKE_EXTRA_TARGETS += clean extra_clean
     clean.depends += extra_clean
     macx:extra_clean.commands += rm -rf $${TARGET}.app $${TARGET}.app.dSYM
     win32:extra_clean.commands += rmdir /S/Q bundled && mkdir bundled
 } 
-
-# publish support for release tags
-QMAKE_EXTRA_TARGETS += publish
-publish.commands += $$QMAKE_DEL_FILE *.tar.gz &&
-publish.commands += cd $${PWD} &&
-publish.commands += git archive --output="$${OUT_PWD}/$${ARCHIVE}-$${VERSION}.tar.gz" --format tar.gz  --prefix=$${ARCHIVE}-$${VERSION}/ v$${VERSION}
-linux:exists("/usr/bin/rpmbuild"):\
-    publish.commands += && rm -f *.src.rpm && rpmbuild --define \"_tmppath /tmp\" --define \"_sourcedir .\" --define \"_srcrpmdir .\" --nodeps -bs $${ARCHIVE}.spec
-
-# documentation processing
-QMAKE_EXTRA_TARGETS += docs
-QMAKE_SUBSTITUTES += doxyfile
-DOXYPATH = $${PWD}
-doxyfile.input = $${PWD}/Doxyfile
-doxyfile.output = $${OUT_PWD}/Doxyfile.out
-macx:docs.commands += PATH=/usr/local/bin:/usr/bin:/bin:/Library/Tex/texbin:$PATH && export PATH &&
-docs.commands += cd $${OUT_PWD} && doxygen Doxyfile.out
-macx:docs.commands += && cd doc/html && make docset && cd ../..
-unix:docs.commands += && cd doc/latex && make
-
-# clean additional testing files on distclean...
-QMAKE_EXTRA_TARGETS += distclean publishclean
-distclean.depends += publishclean
-publishclean.commands += rm -rf Archive $${ARCHIVE}-*.tar.gz $${ARCHIVE}-*.pdf $${ARCHIVE} doc Doxyfile.out
 
 RESOURCES += qrc/desktop.qrc
 OTHER_FILES += \
