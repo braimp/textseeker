@@ -4,9 +4,9 @@
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0+</project_license>
     <name>TextSeeker</name>
-	<summary></summary>
+	<summary>Simple text viewer and search tool</summary>
     <description>
-        <p>A simple text viewer and search tool</p>
+        <p>TextSeeker is somewhat like the original gnome search tool.  This offers a tabbed viewer and a text search.</p>
     </description>
     <screenshots>
         <screenshot type="default">
