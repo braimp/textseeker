@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-    <id type="desktop">textseeker.desktop</id>
+<component type="desktop">
+	<id>textseeker.desktop</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0+</project_license>
     <name>TextSeeker</name>
-    <license>GPL-3.0+</license>
+	<summary></summary>
     <description>
         <p>A simple text viewer and search tool</p>
     </description>
     <screenshots>
         <screenshot type="default">
-            <image>https://pub.cherokeesofidaho.org/screenshots/textseeker.png</image>
+            <image>https://www.cherokeesofidaho.org/public/screenshots/textseeker.png</image>
         </screenshot>
     </screenshots>
-    <url type="homepage">https://www.cherokeesofidaho.org</url>
-    <updatecontact>tychosoft@gmail.com</updatecontact>
-</application>
+    <url type="homepage">https://www.gitlab.com/tychosoft/textseeker</url>
+    <update_contact>tychosoft@gmail.com</update_contact>
+</component>
