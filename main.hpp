@@ -74,8 +74,11 @@ private:
 public slots:
     void reloadMatches();
     void searchText();
+    void searchHome();
     void enableFind();
     void updateIndex(Index *ind);
+    void changeSettings();
+    void closeCurrent();
 
 private slots:
     void about();
@@ -88,7 +91,6 @@ private slots:
 
     void selectDir(int index);
     void changeDir();
-    void changeSettings();
     void closeTab(int tab);
     void changeTab(int tab);
     void showContextMenu(const QPoint& pos);

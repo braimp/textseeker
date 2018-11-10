@@ -19,8 +19,7 @@
 #include "toolbar.hpp"
 #include <QDebug>
 
-Viewer::Viewer(QTabWidget *tabs, QString& path) :
-QTextEdit()
+Viewer::Viewer(QTabWidget *tabs, QString& path)
 {
     QString text, temp;
     int pos;

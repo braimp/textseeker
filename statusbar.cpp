@@ -44,14 +44,28 @@ QWidget(parent)
     f3Key = new QShortcut(QKeySequence(Qt::Key_F3), parent);
     f3Key->setContext(Qt::ApplicationShortcut);
 
+    f6Key = new QShortcut(QKeySequence(Qt::Key_F6), parent);
+    f6Key->setContext(Qt::ApplicationShortcut);
+
+    f8Key = new QShortcut(QKeySequence(Qt::Key_F4), parent);
+    f8Key->setContext(Qt::ApplicationShortcut);
+
     findKey = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_F), parent);
     findKey->setContext(Qt::ApplicationShortcut);
+
+    closeKey = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_W), parent);
+    closeKey->setContext(Qt::ApplicationShortcut);
 
     clearIndicators();
     Main *main = Main::instance();
     connect(ui.f3Indicator, &QPushButton::clicked, main, &Main::searchText);
+    connect(ui.f6Indicator, &QPushButton::clicked, main, &Main::searchHome);
+    connect(ui.f8Indicator, &QPushButton::clicked, main, &Main::changeSettings);
     connect(f3Key, &QShortcut::activated, main, &Main::searchText);
+    connect(f6Key, &QShortcut::activated, main, &Main::searchHome);
+    connect(f8Key, &QShortcut::activated, main, &Main::changeSettings);
     connect(findKey, &QShortcut::activated, main, &Main::enableFind);
+    connect(closeKey, &QShortcut::activated, main, &Main::closeCurrent);
 }
 
 void Statusbar::clearIndicators()
@@ -59,11 +73,25 @@ void Statusbar::clearIndicators()
     if(!visibleDisabled) {
         visibleIndicators = 0;
         ui.f3Indicator->setVisible(false);
+        ui.f6Indicator->setVisible(false);
+        ui.f8Indicator->setVisible(false);
         hide();
     }
     ui.f3Indicator->setEnabled(false);
     f3Key->setEnabled(false);
     findKey->setEnabled(false);
+}
+
+void Statusbar::enableSettings()
+{
+    if(!ui.f8Indicator->isVisible()) {
+        ui.f8Indicator->setVisible(true);
+        if(!visibleIndicators++)
+            show();
+    }
+
+    ui.f8Indicator->setEnabled(true);
+    f8Key->setEnabled(true);
 }
 
 void Statusbar::enableSearch()
@@ -92,4 +120,39 @@ void Statusbar::disableSearch()
     findKey->setEnabled(false);
 }
 
+void Statusbar::disableSettings()
+{
+    if(ui.f8Indicator->isVisible() && !visibleDisabled) {
+        ui.f8Indicator->setVisible(false);
+        if(!--visibleIndicators)
+            hide();
+    }
+
+    ui.f8Indicator->setEnabled(false);
+    f8Key->setEnabled(false);
+}
+
+void Statusbar::enableHome()
+{
+    if(!ui.f6Indicator->isVisible()) {
+        ui.f6Indicator->setVisible(true);
+        if(!visibleIndicators++)
+            show();
+    }
+
+    ui.f6Indicator->setEnabled(true);
+    f6Key->setEnabled(true);
+}
+
+void Statusbar::disableHome()
+{
+    if(ui.f6Indicator->isVisible() && !visibleDisabled) {
+        ui.f6Indicator->setVisible(false);
+        if(!--visibleIndicators)
+            hide();
+    }
+
+    ui.f6Indicator->setEnabled(false);
+    f6Key->setEnabled(false);
+}
 

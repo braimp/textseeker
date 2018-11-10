@@ -21,8 +21,7 @@
 
 static Ui::Options ui;
 
-Options::Options(QTabWidget *tabs) :
-QDialog()
+Options::Options(QTabWidget *tabs)
 {
     ui.setupUi(static_cast<QDialog *>(this));
     ui.checkFilename->setChecked(Main::sensitive());

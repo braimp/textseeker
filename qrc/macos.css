@@ -66,3 +66,11 @@ QTabBar::close-button:hover {
     height: 12px;
     width: 12px;
 }
+
+/* platform specific adjustments */
+
+QLineEdit#searchName, QLineEdit#filterTypes {
+    padding: 2px;
+    border-radius: 4px;
+    border: 1px solid #c0c0c0;
+}

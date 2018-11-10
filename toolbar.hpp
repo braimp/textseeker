@@ -36,6 +36,7 @@ public:
     void clearSearch();
     void disableSearch();
     void enableSearch();
+    void homeOnSearch();
     QString searching();
 
     static inline Toolbar *instance() {
