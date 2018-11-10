@@ -146,7 +146,6 @@ else {
 RESOURCES += qrc/desktop.qrc
 OTHER_FILES += \
     $${TRANSLATIONS} \
-    $${ARCHIVE}.spec \
     CHANGELOG \
     LICENSE \
     README.md \
