@@ -77,6 +77,8 @@ settings(CONFIG_FROM)
     ui.setupUi(static_cast<QMainWindow *>(this));
     ui.filterTypes->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui.searchName->setAttribute(Qt::WA_MacShowFocusRect, false);
+    ui.pathButton->setAttribute(Qt::WA_MacShowFocusRect, false);
+
     toolbar = new Toolbar(this, ui.toolBar);
     statusbar = new Statusbar(ui.centralwidget, ui.statusBar);
     statusbar->enableSettings();
@@ -371,7 +373,7 @@ void Main::showContextMenu(const QPoint& pos)
 
 void Main::changeDir()
 {
-    QString path = QFileDialog::getExistingDirectory(this, tr("Directory"), dir.path());
+    auto path = QFileDialog::getExistingDirectory(this, tr("Directory"), dir.path());
 
     if(!path.isNull()) {
         QDir::setCurrent(path);
