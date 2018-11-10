@@ -36,6 +36,10 @@ public:
 
     void disableSearch();
     void enableSearch();
+    void enableSettings();
+    void disableSettings();
+    void enableHome();
+    void disableHome();
     void clearIndicators();
 
     static inline Statusbar *instance() {
@@ -43,7 +47,7 @@ public:
     }
 
 private:
-    QShortcut *f3Key, *findKey;
+    QShortcut *f3Key, *f6Key, *f8Key, *findKey, *closeKey;
     unsigned visibleIndicators;
     bool visibleDisabled;
     static Statusbar *Instance;

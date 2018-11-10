@@ -27,7 +27,7 @@ class Loader final : public QObject
     Q_OBJECT
     Q_DISABLE_COPY(Loader)
 public:
-    Loader(QObject *parent, const QString basename, const QStringList& ext, const QString& match, bool casefilter);
+    Loader(QObject *parent,  QString basename, const QStringList& ext, const QString& match, bool casefilter);
 
 private:
     QObject *parent;
@@ -40,8 +40,7 @@ signals:
     void createIndex(Index *result);
 };
 
-Index::Index(QString basename, const QStringList& ext, const QString& match, bool caseFlag) :
-QAbstractTableModel()
+Index::Index(QString basename, const QStringList& ext, const QString& match, bool caseFlag)
 {
     auto thread = new QThread();
     moveToThread(thread);
@@ -63,7 +62,7 @@ QAbstractTableModel()
     for(int pos = 0; pos < ext.size(); ++pos)
         filters << (basename + ext[pos]);
 
-    if(ext.size() < 1) {
+    if(ext.empty()) {
         if(basename.isEmpty())
             filters << "*";
         else

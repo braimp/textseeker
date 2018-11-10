@@ -55,8 +55,17 @@ void Toolbar::enableSearch()
     clearSearch();
 }
 
+void Toolbar::homeOnSearch()
+{
+    ui.searchText->setPlaceholderText("");
+    enableSearch();
+}
+
 void Toolbar::disableSearch()
 {
+    auto text = ui.searchText->text();
+    if(text.count() > 0)
+        ui.searchText->setPlaceholderText(text);
     ui.searchText->clear();
     ui.searchText->setEnabled(false);
 }
