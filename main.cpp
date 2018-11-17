@@ -453,6 +453,10 @@ void Main::closeTab(int tab)
             closeTab(1);
         clear();
         toolbar->homeOnSearch();
+        if(options) {
+            options->deleteLater();
+            options = nullptr;
+        }
         return;
     }
 
