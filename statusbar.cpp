@@ -47,7 +47,7 @@ QWidget(parent)
     f6Key = new QShortcut(QKeySequence(Qt::Key_F6), parent);
     f6Key->setContext(Qt::ApplicationShortcut);
 
-    f8Key = new QShortcut(QKeySequence(Qt::Key_F4), parent);
+    f8Key = new QShortcut(QKeySequence(Qt::Key_F8), parent);
     f8Key->setContext(Qt::ApplicationShortcut);
 
     findKey = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_F), parent);

@@ -200,7 +200,7 @@
       <string>Press F8 to activate settings</string>
      </property>
      <property name="text">
-      <string>F4</string>
+      <string>F8</string>
      </property>
      <property name="iconSize">
       <size>

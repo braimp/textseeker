@@ -1,3 +1,6 @@
+v1.2.1
+* Fix settings key F4 to F8
+
 v1.2.0
 * Preserve last search text in placeholder
 * Ctrl-w close key shortcut added
