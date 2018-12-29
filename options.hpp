@@ -37,10 +37,6 @@ public:
         return tab;
     }
 
-private slots:
-    void setViewerSensitive(int state);
-    void setFilesSensitive(int state);
-
 private:
     int tab;
 };

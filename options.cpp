@@ -17,6 +17,7 @@
 
 #include "main.hpp"
 #include "find.hpp"
+#include "viewer.hpp"
 #include "ui_options.h"
 
 static Ui::Options ui;
@@ -26,28 +27,23 @@ Options::Options(QTabWidget *tabs)
     ui.setupUi(static_cast<QDialog *>(this));
     ui.checkFilename->setChecked(Main::sensitive());
     ui.checkSensitive->setChecked(Find::sensitive());
+    ui.checkTimestamp->setChecked(Viewer::timestamps());
 
     tab = tabs->count();
     tabs->addTab(this, tr("Options"));
 
-    connect(ui.checkFilename, &QCheckBox::stateChanged, this, &Options::setFilesSensitive);
-    connect(ui.checkSensitive, &QCheckBox::stateChanged, this, &Options::setViewerSensitive);
+    connect(ui.checkFilename, &QCheckBox::stateChanged, this, [](int state) {
+        Main::setSensitive(state != 0);
+    });
+
+    connect(ui.checkSensitive, &QCheckBox::stateChanged, this, [](int state) {
+        Find::setSensitive(state != 0);
+    });
+
+    connect(ui.checkTimestamp, &QCheckBox::stateChanged, this, [](int state) {
+        Viewer::setTimestamps(state != 0);
+    });
 }
 
 Options::~Options() = default;
 
-void Options::setViewerSensitive(int state)
-{
-    if(state)
-        Find::setSensitive(true);
-    else
-        Find::setSensitive(false);
-}
-
-void Options::setFilesSensitive(int state)
-{
-    if(state)
-        Main::setSensitive(true);
-    else
-        Main::setSensitive(false);
-}

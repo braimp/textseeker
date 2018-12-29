@@ -18,16 +18,40 @@
 #include "viewer.hpp"
 #include "toolbar.hpp"
 #include <QDebug>
+#include <QDateTime>
+
+bool Viewer::Timestamps = false;
 
 Viewer::Viewer(QTabWidget *tabs, QString& path)
 {
     QString text, temp;
     int pos;
+    time_t prior = 0;
     QFile file(path);
 
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         while(!file.atEnd()) {
             temp = file.readLine();
+            if(timestamps && temp[0] == 'T' && temp[1] == ' ' && temp[2].isDigit()) {
+                for(int pos = 3; pos < temp.size(); ++pos) {
+                    if(temp[pos] == ' ') {
+                        time_t timeline = temp.mid(2, pos - 2).toULong();
+                        temp = temp.mid(pos + 1);
+                        if(timeline < (prior + 3600)) {
+                            prior = timeline;
+                            break;
+                        }
+                        if(prior)
+                            text = text + "\n";
+                        prior = timeline;
+                        auto when = QDateTime::fromTime_t(timeline).toLocalTime();
+                        text = text + when.toString(Qt::SystemLocaleShortDate) + ":\n";
+                        break;
+                    }
+                    if(!temp[pos].isDigit())
+                        break;
+                }
+            }
             while((pos = temp.indexOf("\002")) > -1) {
                 temp.remove(pos, 1);
             }

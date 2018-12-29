@@ -1,5 +1,5 @@
 TEMPLATE = app
-VERSION = 1.2.1
+VERSION = 1.2.2
 COPYRIGHT = 2017-2018
 ARCHIVE = textseeker
 
