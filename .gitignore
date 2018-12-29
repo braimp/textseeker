@@ -15,6 +15,7 @@ doc/
 *.dmg
 *.deb
 *.dsc
+*.ddeb
 *.changes
 *.buildinfo
 *.upload
