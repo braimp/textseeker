@@ -83,6 +83,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkTimestamp">
+        <property name="text">
+         <string>Process Timestamp Text</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>

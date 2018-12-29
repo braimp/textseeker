@@ -44,6 +44,14 @@ public:
 
     void setDirection(bool forward, bool sensitivity);
 
+    inline static bool timestamps() {
+        return Timestamps;
+    }
+
+    inline static void setTimestamps(bool flag) {
+        Timestamps = flag;
+    }
+
 private:
     QTextDocument::FindFlags findBy;
     QString findText;
@@ -51,6 +59,8 @@ private:
     int tab;
 
     void searchText();
+
+    static bool Timestamps;
 
 public slots:
     void activateFind();

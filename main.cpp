@@ -99,9 +99,11 @@ settings(CONFIG_FROM)
 #ifdef PROJECT_TESTDATA
     Sensitive = false;
     Find::setSensitive(false);
+    Viewer::setTimestamps(false);
 #else
     Sensitive = settings.value("filename", false).toBool();
     Find::setSensitive(settings.value("textbody", false).toBool());
+    Viewer::setTimestamps(settings.value("timestamps", false).toBool());
 #endif
 
     if(dirPrefix.isEmpty()) {
@@ -200,6 +202,7 @@ void Main::sync()
 
     settings.setValue("filename", Sensitive);
     settings.setValue("textbody", Find::sensitive());
+    settings.setValue("timestamps", Viewer::timestamps());
     settings.setValue("size", size());
     settings.sync();
 #endif
