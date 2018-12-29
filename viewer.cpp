@@ -26,16 +26,16 @@ Viewer::Viewer(QTabWidget *tabs, QString& path)
 {
     QString text, temp;
     int pos;
-    time_t prior = 0;
+    uint prior = 0;
     QFile file(path);
 
     if(file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         while(!file.atEnd()) {
             temp = file.readLine();
-            if(timestamps && temp[0] == 'T' && temp[1] == ' ' && temp[2].isDigit()) {
+            if(Timestamps && temp[0] == 'T' && temp[1] == ' ' && temp[2].isDigit()) {
                 for(int pos = 3; pos < temp.size(); ++pos) {
                     if(temp[pos] == ' ') {
-                        time_t timeline = temp.mid(2, pos - 2).toULong();
+                        auto timeline = temp.mid(2, pos - 2).toUInt();
                         temp = temp.mid(pos + 1);
                         if(timeline < (prior + 3600)) {
                             prior = timeline;
