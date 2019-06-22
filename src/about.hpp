@@ -19,7 +19,6 @@
 #define ABOUT_HPP_
 
 #include <QDialog>
-
 #include "compiler.hpp"
 
 class About final : public QDialog
@@ -29,10 +28,6 @@ class About final : public QDialog
 
 public:
     About(QWidget *parent = nullptr);
-
-private slots:
-    void aboutProject();
-    void aboutTribal();
 };
 
 /*!
