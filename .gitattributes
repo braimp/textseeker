@@ -6,5 +6,7 @@
 .gitignore	export-ignore
 .gitlab-ci.yml export-ignore
 .gitlab/ export-ignore
+.deploy/ export-ignore
+
 debian/ export-ignore
 redhat/ export-ignore
